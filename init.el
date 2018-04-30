@@ -50,26 +50,22 @@
   ("C-x g" . magit-status)
   )
 
-
-
-;;
-;; enable recentf
-;;
-
 ;;
 ;; setup ivy mode
 ;;
 (use-package ivy
   :ensure t
+  :bind
+  ("\C-s" . swiper)
+  ("C-c C-r" . ivy-resume)
+  ("M-x" . counsel-M-x)
+  ("C-x C-f" . counsel-find-file)
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (use-package swiper :ensure t)
-  (use-package counsel :ensure t)
-  (global-set-key "\C-s" 'swiper)
-  (global-set-key (kbd "C-c C-r") 'ivy-resume)
-  (global-set-key (kbd "M-x") 'counsel-M-x)
-  (global-set-key (kbd "C-x C-f") 'counsel-find-file))
+  (use-package counsel :ensure t))
+
 
 ;;
 ;; setup yasnippets
