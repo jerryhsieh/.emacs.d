@@ -7,6 +7,13 @@
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (package-refresh-contents)
 
+
+;;
+;; require use-package
+;;
+(require 'use-package)
+
+
 ;;
 ;; some basic customization
 ;;
@@ -35,52 +42,69 @@
 ;;
 ;; set up magit
 ;;
-(require 'magit)
+(use-package magit
+  :ensure t
+  
+  )
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;;
 ;; setup ivy mode
 ;;
-(require 'ivy)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
-(global-set-key "\C-s" 'swiper)
-(global-set-key (kbd "C-c C-r") 'ivy-resume)
-(global-set-key (kbd "<f6>") 'ivy-resume)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "<f1> f") 'counsel-describe-function)
-(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-(global-set-key (kbd "<f1> l") 'counsel-find-library)
-(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-(global-set-key (kbd "C-c g") 'counsel-git)
-(global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "C-c k") 'counsel-ag)
-(global-set-key (kbd "C-x l") 'counsel-locate)
-(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+(use-package ivy
+  :ensure t
+  :init
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  :bind
+  (:map ivy-mode-map
+	("C-'" . ivy-avy))
+  ("\C-s" . swiper)
+  ("C-c C-r" . ivy-resume)
+  ("M-x" . counsel-M-x)
+  ("C-x C-f" . counsel-find-file)
+  :config
+  (ivy-mode 1)
+  )
 
 ;;
 ;; setup yasnippets
 ;;
-(require 'yasnippet)
-(yas-global-mode 1)
-(require 'yasnippet-snippets)
+
+(use-package yasnippet
+  :ensure t
+  :init
+  (yas-global-mode)
+  (add-hook 'web-mode-hook #'(lambda () (yas-activate-extra-mode 'web-mode)))
+  )
+
+(use-package yasnippet-snippets
+  :ensure t
+  )
 
 ;;
 ;; company mode
 ;;
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
+(use-package company
+  :ensure t
+  :init
+  (add-hook 'after-init-hook 'global-company-mode)  
+  )
 
 
 ;;
 ;; flycheck mode
 ;;
-(require 'flycheck)
-(global-flycheck-mode)
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode)
+  )
 
+;;
+;; for web developement
+;; 
+(load "~/.emacs.d/customize/web.el")
 
 
 
