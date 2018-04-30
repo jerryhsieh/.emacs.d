@@ -11,7 +11,10 @@
 ;;
 ;; require use-package
 ;;
-(require 'use-package)
+(eval-when-compile
+  (require 'use-package))
+;;(require 'diminish)                ;; if you use :diminish
+;;(require 'bind-key)                ;; if you use any :bind variant
 
 
 ;;
@@ -48,24 +51,26 @@
   )
 (global-set-key (kbd "C-x g") 'magit-status)
 
+
+;;
+;; enable recentf
+;;
+;; (recentf-mode 1)
+
 ;;
 ;; setup ivy mode
 ;;
 (use-package ivy
   :ensure t
-  :init
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
-  :bind
-  (:map ivy-mode-map
-	("C-'" . ivy-avy))
-  ("\C-s" . swiper)
-  ("C-c C-r" . ivy-resume)
-  ("M-x" . counsel-M-x)
-  ("C-x C-f" . counsel-find-file)
   :config
   (ivy-mode 1)
-  )
+  (setq ivy-use-virtual-buffers t)
+  (use-package swiper :ensure t)
+  (use-package counsel :ensure t)
+  (global-set-key "\C-s" 'swiper)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file))
 
 ;;
 ;; setup yasnippets
@@ -76,11 +81,10 @@
   :init
   (yas-global-mode)
   (add-hook 'web-mode-hook #'(lambda () (yas-activate-extra-mode 'web-mode)))
+  :config
+  (use-package yasnippet-snippets :ensure t)
   )
 
-(use-package yasnippet-snippets
-  :ensure t
-  )
 
 ;;
 ;; company mode
@@ -88,7 +92,7 @@
 (use-package company
   :ensure t
   :init
-  (add-hook 'after-init-hook 'global-company-mode)  
+  (add-hook 'after-init-hook 'global-company-mode)
   )
 
 
