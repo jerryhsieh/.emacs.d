@@ -9,7 +9,7 @@
  '(package-selected-packages
    (quote
     (counsel counstel ivy yasnippet-snippet web-mode use-package flycheck company yasnippet-snippets yasnippet magit)))
- '(recentf-mode t))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

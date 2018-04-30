@@ -13,9 +13,8 @@
 ;;
 (eval-when-compile
   (require 'use-package))
-;;(require 'diminish)                ;; if you use :diminish
-;;(require 'bind-key)                ;; if you use any :bind variant
-
+(use-package diminish :ensure t)
+(use-package bind-key :ensure t)
 
 ;;
 ;; some basic customization
@@ -47,15 +46,15 @@
 ;;
 (use-package magit
   :ensure t
-  
+  :bind
+  ("C-x g" . magit-status)
   )
-(global-set-key (kbd "C-x g") 'magit-status)
+
 
 
 ;;
 ;; enable recentf
 ;;
-;; (recentf-mode 1)
 
 ;;
 ;; setup ivy mode
