@@ -5,6 +5,7 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+(package-refresh-contents)
 
 ;;
 ;; some basic customization
@@ -59,4 +60,27 @@
 (global-set-key (kbd "C-x l") 'counsel-locate)
 (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+
+;;
+;; setup yasnippets
+;;
+(require 'yasnippet)
+(yas-global-mode 1)
+(require 'yasnippet-snippets)
+
+;;
+;; company mode
+;;
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+
+
+;;
+;; flycheck mode
+;;
+(require 'flycheck)
+(global-flycheck-mode)
+
+
+
 
