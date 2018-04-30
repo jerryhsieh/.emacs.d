@@ -56,10 +56,10 @@
 (use-package ivy
   :ensure t
   :bind
-  ("\C-s" . swiper)
+  (("\C-s" . swiper)
   ("C-c C-r" . ivy-resume)
   ("M-x" . counsel-M-x)
-  ("C-x C-f" . counsel-find-file)
+  ("C-x C-f" . counsel-find-file))
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
