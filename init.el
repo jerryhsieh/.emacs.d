@@ -100,10 +100,30 @@
   (global-flycheck-mode)
   )
 
+
+;;
+;; use projectile
+;;
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-global-mode)
+  (setq projectile-completion-system 'ivy)
+  (setq projectile-enable-caching t)
+  (projectile-register-project-type 'npm '("package.json")
+                  :compile "npm install"
+                  :test "npm test"
+                  :run "npm start"
+                  :test-suffix ".spec")
+  )
+
+
 ;;
 ;; for web developement
 ;; 
 (load "~/.emacs.d/customize/web.el")
 
 
+(provide 'init)
+;;; init.el end here
 
